@@ -11,18 +11,26 @@ public class Product {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long id;
-	public String name;
+	private long id;
+	private String name;
 	@Column(columnDefinition = "TEXT")
-	public String description;
-	public double price;
-	public String imgUrl;
+	private String description;
+	private double price;
+	private String imgUrl;
 	
 	@ManyToMany
 	@JoinTable(name= "tb_product_category",
 				joinColumns = @JoinColumn(name = "product_id"),
 				inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories = new HashSet<>();
+	
+	//diferencial quando se tem chave estrangeira tipo PK do OrderItemPK
+	@OneToMany(mappedBy = "id.product")
+	private Set<OrderItem> items = new HashSet<>();
+	
+	public Set<OrderItem> getItems() {
+		return items;
+	}
 	
 	public Product() {
 		super();

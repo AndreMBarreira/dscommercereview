@@ -13,13 +13,13 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long id;
-	public String name;
+	private long id;
+	private String name;
 	@Column(unique = true)
-	public String email;
-	public String phone;
-	public LocalDate birthDate;
-	public String password;
+	private String email;
+	private String phone;
+	private LocalDate birthDate;
+	private String password;
 	
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();

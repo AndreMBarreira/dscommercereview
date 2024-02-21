@@ -1,7 +1,9 @@
 package com.devsuperior.dscommerce.entities;
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.*;
 
@@ -11,10 +13,10 @@ public class Order {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long id;
+	private long id;
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	public Instant moment;
-	public OrderStatus status;
+	private Instant moment;
+	private OrderStatus status;
 	
 	@ManyToOne
 	@JoinColumn(name = "client_id")
@@ -23,6 +25,14 @@ public class Order {
 	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
 	private Payment payment;
 	
+	//diferencial quando se tem chave estrangeira tipo PK do OrderItemPK
+	@OneToMany(mappedBy = "id.order")
+	private Set<OrderItem> items = new HashSet<>();
+	
+	public Set<OrderItem> getItems() {
+		return items;
+	}
+
 	public Order() {}
 
 	public Order(long id, Instant moment, OrderStatus status, User client, Payment payment) {

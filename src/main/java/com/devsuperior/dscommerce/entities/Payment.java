@@ -9,9 +9,9 @@ public class Payment {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long id;
+	private long id;
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	public Instant moment;
+	private Instant moment;
 	
 	@OneToOne
 	@MapsId
