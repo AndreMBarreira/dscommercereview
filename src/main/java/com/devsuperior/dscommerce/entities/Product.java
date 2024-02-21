@@ -1,6 +1,7 @@
 package com.devsuperior.dscommerce.entities;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.*;
@@ -27,6 +28,10 @@ public class Product {
 	//diferencial quando se tem chave estrangeira tipo PK do OrderItemPK
 	@OneToMany(mappedBy = "id.product")
 	private Set<OrderItem> items = new HashSet<>();
+	
+	public List<Order> getOrder(){
+		return items.stream().map(x -> x.getOrder()).toList();
+	}
 	
 	public Set<OrderItem> getItems() {
 		return items;
