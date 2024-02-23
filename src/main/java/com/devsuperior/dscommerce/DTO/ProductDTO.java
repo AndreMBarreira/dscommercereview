@@ -9,10 +9,6 @@ public class ProductDTO {
 	private String description;
 	private double price;
 	private String imgUrl;
-	
-	public ProductDTO() {
-		super();
-	}
 
 	public ProductDTO(long id, String name, String description, double price, String imgUrl) {
 		super();
