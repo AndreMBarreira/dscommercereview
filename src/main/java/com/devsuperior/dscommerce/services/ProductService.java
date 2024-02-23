@@ -39,6 +39,18 @@ public class ProductService {
 
 	}
 	
+	@Transactional
+	public ProductDTO update(Long id, ProductDTO dto) {
+		
+		Product entity = repository.getReferenceById(id);
+		copyDtoToEntity(dto, entity);
+		
+		entity = repository.save(entity);
+		
+		return new ProductDTO(entity);
+
+	}
+	
 	private void copyDtoToEntity(ProductDTO dto, Product entity) {
 
 		entity.setName(dto.getName());
