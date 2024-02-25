@@ -13,7 +13,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String name;
 	@Column(unique = true)
 	private String email;
@@ -21,13 +21,15 @@ public class User {
 	private LocalDate birthDate;
 	private String password;
 	
-	@OneToMany(mappedBy = "client")
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "client_id")
 	private List<Order> orders = new ArrayList<>();
 	
-	
+
 	public List<Order> getOrders() {
 		return orders;
 	}
+	
 
 	public User() {
 		
