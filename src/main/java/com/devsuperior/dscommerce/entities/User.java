@@ -21,6 +21,7 @@ public class User {
 	private LocalDate birthDate;
 	private String password;
 	
+	//EAGER torna a chamada lazy em "EAGER"
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_id")
 	private List<Order> orders = new ArrayList<>();

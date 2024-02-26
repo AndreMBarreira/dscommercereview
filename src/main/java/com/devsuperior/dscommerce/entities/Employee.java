@@ -1,8 +1,5 @@
 package com.devsuperior.dscommerce.entities;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-
 public class Employee {
 	
 	public String name;
