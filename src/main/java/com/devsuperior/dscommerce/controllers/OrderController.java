@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.devsuperior.dscommerce.DTO.OrderDTO;
 import com.devsuperior.dscommerce.DTO.OrdersUserDTO;
 import com.devsuperior.dscommerce.services.OrderService;
 
@@ -20,8 +21,16 @@ public class OrderController {
 	@Autowired
 	private OrderService service;
 	
-	@PostMapping()
+	//Comentado para o outro metodo ser testado @PostMapping()
 	public ResponseEntity<OrdersUserDTO> insert(@RequestBody OrdersUserDTO dto) {
+		dto = service.insert(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(dto.getId()).toUri();
+		return ResponseEntity.created(uri).body(dto);
+	}
+	
+	@PostMapping()
+	public ResponseEntity<OrderDTO> insert(@RequestBody OrderDTO dto) {
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(dto.getId()).toUri();
