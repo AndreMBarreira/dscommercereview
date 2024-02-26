@@ -21,7 +21,7 @@ public class OrderController {
 	@Autowired
 	private OrderService service;
 	
-	//Comentado para o outro metodo ser testado @PostMapping()
+	@PostMapping()
 	public ResponseEntity<OrdersUserDTO> insert(@RequestBody OrdersUserDTO dto) {
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -29,7 +29,7 @@ public class OrderController {
 		return ResponseEntity.created(uri).body(dto);
 	}
 	
-	@PostMapping()
+	//Comentado para o outro metodo ser testado @PostMapping()
 	public ResponseEntity<OrderDTO> insert(@RequestBody OrderDTO dto) {
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.devsuperior.dscommerce.DTO.ProductCategoryDTO;
 import com.devsuperior.dscommerce.DTO.ProductDTO;
 import com.devsuperior.dscommerce.services.ProductService;
 
@@ -38,8 +39,16 @@ public class ProductController {
 		return ResponseEntity.ok(service.findAll(pageable));
 	}
 	
-	@PostMapping()
+	//Comentado para testar outro metodo @PostMapping()
 	public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO dto) {
+		dto = service.insert(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(dto.getId()).toUri();
+		return ResponseEntity.created(uri).body(dto);
+	}
+	
+	@PostMapping()
+	public ResponseEntity<ProductCategoryDTO> insert(@Valid @RequestBody ProductCategoryDTO dto) {
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(dto.getId()).toUri();
