@@ -2,8 +2,10 @@ package com.devsuperior.dscommerce.entities;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.*;
 
@@ -26,12 +28,16 @@ public class User {
 	@OneToMany
 	@JoinColumn(name = "client_id")
 	private List<Order> orders = new ArrayList<>();
-	
 
 	public List<Order> getOrders() {
 		return orders;
 	}
-	
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name= "tb_user_role",
+				joinColumns = @JoinColumn(name = "user_id"),
+				inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
 
 	public User() {
 		
@@ -44,6 +50,23 @@ public class User {
 		this.phone = phone;
 		this.birthDate = birthDate;
 		this.password = password;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+	
+	public void addRole() {
+		
+	}
+	
+	public boolean hasRole(String roleName) {
+		for(Role role : roles) {
+			if (role.getAuthority().equals(roleName)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public long getId() {
