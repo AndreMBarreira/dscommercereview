@@ -28,6 +28,7 @@ public class OrderService {
 		return new OrderDTO(order);
 	}
 	
+	@Transactional
 	public OrdersUserDTO insert(OrdersUserDTO dto) {
 		Order entity = new Order();
 		copyDtoToEntity(dto, entity);
@@ -36,6 +37,7 @@ public class OrderService {
 	}
 	
 	//Pode-se manter metodos com mesmo nome(sobrecarga), mas com parametros diferentes 
+	@Transactional
 	public OrderDTO insert(OrderDTO dto) {
 		Order entity = new Order();
 		
