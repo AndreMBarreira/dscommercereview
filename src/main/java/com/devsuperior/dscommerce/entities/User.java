@@ -60,8 +60,8 @@ public class User implements UserDetails{
 		return roles;
 	}
 	
-	public void addRole() {
-		
+	public void addRole(Role role) {
+		roles.add(role);
 	}
 	
 	public boolean hasRole(String roleName) {
